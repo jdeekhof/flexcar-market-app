@@ -14,13 +14,12 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
-
+`bundle exec rails db:create`
 * Database initialization
-
+`bundle exec rails bd:seed`
 * How to run the test suite
-
+`rspec`
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
 
-* ...
