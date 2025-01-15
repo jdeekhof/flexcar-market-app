@@ -5,6 +5,6 @@ class ProductsController < ApplicationController
     @product = Product.new
     @category = Category.new
   end
-  
+
   def create; end
 end
