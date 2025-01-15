@@ -1,7 +1,7 @@
 # README
 This repository is a take-home assessment for Flexcar.
 
-Things you may want to cover:
+Access the site here:   https://flexcar-market-app-8abf6aa694c6.herokuapp.com/
 
 * Ruby version
     3.2.1
