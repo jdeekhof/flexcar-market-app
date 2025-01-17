@@ -17,20 +17,15 @@ class ProductsController < ApplicationController
       dollars: create_params[:dollars],
       cents: create_params[:cents]
     )
-    product = Product.create(
+    product = Product.create!(
       name: create_params[:name],
       brand: create_params[:brand],
       category_id:,
       cents_price_per_unit:,
       units_of_sale: create_params[:units_of_sale],
       )
-    if product.save
-      flash.notice = "Product Saved!"
-      redirect_to products_path, status: 200
-    else
-      flash.alert = product.errors
-      redirect_to new_product_path, status: 500
-    end
+    flash.notice = "Product Saved!"
+    redirect_to products_path
   end
 
   private
@@ -45,5 +40,13 @@ class ProductsController < ApplicationController
       :units_of_sale,
       :category_name
     )
+  end
+
+  def handle_record_not_found(exception)
+    record_not_found(exception:, path: new_product_path)
+  end
+
+  def handle_record_invalid(exception)
+    record_invalid(exception:, path: products_path)
   end
 end

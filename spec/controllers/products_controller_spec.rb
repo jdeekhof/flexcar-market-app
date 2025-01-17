@@ -24,7 +24,7 @@ RSpec.describe ProductsController, type: :controller do
             category_name: 'uncategorized'
           }
         }
-        expect(response.status).to eq(200)
+        expect(response.status).to eq(302)
         expect(Product.last.name).to eq(name)
       end
     end
@@ -37,7 +37,7 @@ RSpec.describe ProductsController, type: :controller do
 
       it 'will show all promotions' do
         get :index
-        expect(assigns(:product).ids.include?([product_one.id, product_two.id]))
+        expect(assigns(:products).ids.include?([ product_one.id, product_two.id ]))
       end
     end
   end

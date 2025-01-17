@@ -23,7 +23,7 @@ RSpec.describe PromotionsController, type: :controller do
             minimum_quantity: 1,
             discount_type: 0,
             discount_scalar: 100,
-            discount_scalar_cents: 0,
+            discount_scalar_cents: 0
           }
         }
         expect(Promotion.last.code).to eq(promo_code)
@@ -38,7 +38,7 @@ RSpec.describe PromotionsController, type: :controller do
 
       it 'will show all promotions' do
         get :index
-        expect(assigns(:promotions).ids.include?([promo_one.id, promo_two.id]))
+        expect(assigns(:promotions).ids.include?([ promo_one.id, promo_two.id ]))
       end
     end
   end

@@ -5,4 +5,12 @@ class Promotion < ApplicationRecord
   validates :begins_at, comparison: { less_than: :ends_at }, if: :ends_at
   enum :discount_type, [ :flat, :percentage, :buy_x_get_y ]
   belongs_to :promotionable, polymorphic: true
+
+  scope :occurring_now, -> { where("NOW() BETWEEN begins_at AND COALESCE(ends_at, NOW())") }
+  scope :product_or_category_related, ->(products:) do
+    where(promotionable_type: Category.to_s, promotionable_id: products.pluck(:category_id)
+    ).or(
+      Promotion.where(promotionable_type: Product.to_s, promotionable_id: products.ids)
+    )
+  end
 end
