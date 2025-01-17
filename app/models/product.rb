@@ -13,4 +13,8 @@ class Product < ApplicationRecord
       product: self
     ).add_promotion(promotion)
   end
+
+  def least_expensive_price
+    cents_price_per_unit
+  end
 end

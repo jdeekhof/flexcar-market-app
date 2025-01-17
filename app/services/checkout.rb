@@ -35,7 +35,7 @@ class Checkout < ApplicationService
   end
 
   def cents_discount(item:, promotion:)
-    if promotion.flat?
+    if promotion.flat? || promotion.bogo?
       flat_discount(promotion:)
     else
       percentage_discount(item:, promotion:)

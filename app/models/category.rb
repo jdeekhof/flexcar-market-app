@@ -12,4 +12,8 @@ class Category < ApplicationRecord
     |cart_item| cart_item.add_promotion(promotion)
     end
   end
+
+  def least_expensive_price
+    products.order(:cents_price_per_unit => :asc).first
+  end
 end

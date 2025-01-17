@@ -9,15 +9,18 @@ class PromotionsController < ApplicationController
 
   def create
     discount_type = Promotion.discount_types.keys[create_params[:discount_type].to_i]
+    promotionable = find_promotionable_from_params(create_params[:promotionable])
     if discount_type == "flat"
       scalar = ::DollarsToCentsConverter.call!(
         dollars: create_params[:discount_scalar],
         cents: create_params[:discount_scalar_cents]
       )
+    elsif discount_type == "bogo"
+      free_items = create_params[:discount_scalar]
+      scalar = promotionable.least_expensive_price * free_items.to_i
     else
       scalar = create_params[:discount_scalar]
     end
-    promotionable = find_promotionable_from_params(create_params[:promotionable])
     promotion = Promotion.create(
       code: create_params[:code],
       promotionable:,
